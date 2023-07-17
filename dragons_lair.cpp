@@ -6,8 +6,7 @@
 #include <unistd.h>
 using namespace std;
 
-int hp = 4500;
-int mp = 2500;
+int hp = 1800;
 int hpDragon = 32430;
 int dmgHero, dmgLord;
 char options[6];
@@ -29,27 +28,18 @@ void damageDragon() {
     }
 }
 
-void skill(int dmgHero, int mc) {
+void skill(int dmgHero) {
     hpDragon -= dmgHero;
-    mp -= mc;
     if (hpDragon < 0) {
       hpDragon = 0;
     }
-    if (mp < 0) {
-        mp = 0;
-    }
 }
 
-void tambahHp(int jmltambah) {
+void addHp(int jmltambah) {
     hp += jmltambah;
     if (hp > 4500) {
         hp = 4500;
     }
-}
-
-void thunder_strike() {
-    damageDragon();
-    cout << "Damage Thunder Strike Lord : 1000\n";
 }
 
 int randomgen(int max, int min) {
@@ -76,11 +66,10 @@ int main() {
     do {
         int cheat = randomgen(99999, 1000); 
         decoration2();
-        cout << "\t  ===== Serangan Lord ke-" << attackRound << " =====\n";
+        cout << "\t  ===== Serangan Dragon ke-" << attackRound << " =====\n";
         decoration2();
         cout << "=\tHero : Baby Dragon\t\n";
-        cout << "=\tHp   : " << hp << "/4500\t\n";
-        cout << "=\tMp   : " << mp << "/2500\t\n";
+        cout << "=\tHp   : " << hp << "/1800\t\n";
         cout << "=\t     ------\t\t\n";
         cout << "=\t     | VS |\t\t\n";
         cout << "=\t     ------\t\t\n";
@@ -119,21 +108,14 @@ int main() {
                 loop = false;
             } else {
                 if(stoi(options) == cheat) { 
-                    if (mp <= 0) {
-                        attackRound -= 1;
-                        cout << "'Mana' habis, silahkan recall dulu\n";
-                    } else {
-                        cout << "Anda telah menekan tombol 'Gather' rekan tim anda\nMiya dan Roger datang membantu\n";
-                        decoration();
-                        cout << "Damage bersama : 50000\n"; 
-                        skill(50000, 10); 
-                        if(attackRound % 3 == 0) {
-                            thunder_strike();
-                        } else {
-                            cout << "Damage Lord : 500\n";
-                            damageDragon();
-                        }
-                    }
+                    cout << "You dropping 10 Electro Dragon(+4500 Hp)\n";
+                    addHp(4500);
+                    decoration();
+                    cout << "Damage : 3243\n"; 
+                    skill(3243); 
+                    cout << "Damage Dragon : 1750\n";
+                    damageDragon();
+                
                 } else {
                         switch (stoi(options)) {
                             case 0:
@@ -141,63 +123,28 @@ int main() {
                                 loop = false;
                                 break;
                             case 1:
-                                if (mp <= 0) {
-                                    attackRound -= 1;
-                                    cout << "'Mana' habis, silahkan recall dulu\n";
-                                } else {
-                                    cout << "Damage skill : 450\n";
-                                    skill(450, 90);
-                                    if(attackRound % 3 == 0) {
-                                        thunder_strike();
-                                    } else {
-                                        damageDragon();
-                                        cout << "Damage Lord : 500\n";
-                                    }
-                                }
+                                cout << "Damage skill : 450\n";
+                                skill(450);
+                                damageDragon();
+                                cout << "Damage Dragon : 1750\n";
                                 break;
                             case 2:
-                                if (mp <= 0) {
-                                    attackRound -= 1;
-                                    cout << "'Mana' habis, silahkan recall dulu\n";
-                                } else {
-                                    cout << "Damage skill : 650\n";
-                                    skill(650, 110);
-                                    if(attackRound % 3 == 0) {
-                                        thunder_strike();
-                                    } else {
-                                        damageDragon();
-                                        cout << "Damage Lord : 500\n";
-                                    }
-                                }
+                                cout << "Damage skill : 650\n";
+                                skill(650);
+                                damageDragon();
+                                cout << "Damage Dragon : 1750\n";
                                 break;
                             case 3:
-                                if (mp <= 0) {
-                                    attackRound -= 1;
-                                    cout << "'Mana' habis, silahkan recall dulu\n";
-                                } else {
-                                    cout << "Damage skill : 840\n";
-                                    skill(840, 180);
-                                    if(attackRound % 3 == 0) {
-                                        thunder_strike();
-                                    } else {
-                                        damageDragon();
-                                        cout << "Damage Lord : 500\n";
-                                    }
-                                }
+                                cout << "Damage spell : 560\n";
+                                skill(560);
+                                damageDragon();
+                                cout << "Damage Dragon : 1750\n";
                                 break;
                             case 4:
-                                if(hp == 4500) {
-                                    cout << "Hp sudah penuh\n";
-                                } else {
-                                    tambahHp(1000);
-                                    cout << "Regen Hp : 1000\n";
-                                }
-                                if(attackRound % 3 == 0) {
-                                    thunder_strike();
-                                } else {
-                                    damageDragon();
-                                    cout << "Damage Lord : 500\n";
-                                }
+                                addHp(1800);
+                                cout << "Total troop heal : 1800\n";
+                                damageDragon();
+                                cout << "Damage Dragon : 1750\n";
                                 break;
                             default:
                                 attackRound -= 1;

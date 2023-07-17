@@ -22,8 +22,8 @@ void hiasan2() {
     cout << "===================================================\n";
 }
 
-void damageLord(int dmgLord) {
-    hp -= dmgLord;
+void damageLord() {
+    hp -= 1750;
     if (hp < 0) {
         hp = 0;
     }
@@ -48,15 +48,8 @@ void tambahHp(int jmltambah) {
 }
 
 void thunder_strike() {
-    damageLord(1000);
+    damageLord();
     cout << "Damage Thunder Strike Lord : 1000\n";
-}
-
-void recall() {
-    attackRound = 0;
-    hp = 4500;
-    mp = 2500;
-    hpLord = 1000000;
 }
 
 // int randomgen(int max, int min) {
@@ -107,7 +100,6 @@ int main() {
         cout << "[3] Thunder's Wrath\n";
         cout << "[4] Regen\n";
         cout << "[5] Revitalize\n";
-        cout << "[6] Recall\n";
         cout << "[0] AFK\n";
         cout << "Pilihan anda [ketik angka saja]: ";
         cin >> pilihan;
@@ -121,13 +113,6 @@ int main() {
                 cout << "| {Defeat} |\n";
                 cout << "------------\n";
                 sleep(2);
-                for(int r = 30; r >= 0; r--) {
-                    system("clear");
-                    cout << "\n{Resurrecting in " << r << "s}\n";
-                    sleep(1);
-                }
-                recall();
-                system("clear");
             } else if (hpLord <= 0) {
                 ifstream myfile;
                 string flag;
@@ -152,7 +137,7 @@ int main() {
                             thunder_strike();
                         } else {
                             cout << "Damage Lord : 500\n";
-                            damageLord(500);
+                            damageLord();
                         }
                     }
                 } else {
@@ -171,7 +156,7 @@ int main() {
                                     if(attackRound % 3 == 0) {
                                         thunder_strike();
                                     } else {
-                                        damageLord(500);
+                                        damageLord();
                                         cout << "Damage Lord : 500\n";
                                     }
                                 }
@@ -186,7 +171,7 @@ int main() {
                                     if(attackRound % 3 == 0) {
                                         thunder_strike();
                                     } else {
-                                        damageLord(500);
+                                        damageLord();
                                         cout << "Damage Lord : 500\n";
                                     }
                                 }
@@ -201,7 +186,7 @@ int main() {
                                     if(attackRound % 3 == 0) {
                                         thunder_strike();
                                     } else {
-                                        damageLord(500);
+                                        damageLord();
                                         cout << "Damage Lord : 500\n";
                                     }
                                 }
@@ -225,13 +210,9 @@ int main() {
                                 if(attackRound % 3 == 0) {
                                     thunder_strike();
                                 } else {
-                                    damageLord(500);
+                                    damageLord();
                                     cout << "Damage Lord : 500\n";
                                 }
-                                break;
-                            case 6:
-                                cout << "Tasss...tasss...tasss...\n";
-                                recall();
                                 break;
                             default:
                                 attackRound -= 1;
