@@ -8,32 +8,32 @@ using namespace std;
 
 int hp = 4500;
 int mp = 2500;
-int hpDragon = 32430;
+int hpLord = 1000000;
 int dmgHero, dmgLord;
-char options[6];
+char pilihan[6];
 bool loop = true;
 int attackRound = 1;
 
-void decoration() {
-    cout << "------------------------------------------\n";
+void hiasan1() {
+    cout << "---------------------------------------------------\n";
 }
 
-void decoration2() {
-    cout << "==========================================\n";
+void hiasan2() {
+    cout << "===================================================\n";
 }
 
-void damageDragon() {
-    hp -= 1750;
+void damageLord(int dmgLord) {
+    hp -= dmgLord;
     if (hp < 0) {
         hp = 0;
     }
 }
 
 void skill(int dmgHero, int mc) {
-    hpDragon -= dmgHero;
+    hpLord -= dmgHero;
     mp -= mc;
-    if (hpDragon < 0) {
-      hpDragon = 0;
+    if (hpLord < 0) {
+        hpLord = 0;
     }
     if (mp < 0) {
         mp = 0;
@@ -48,10 +48,22 @@ void tambahHp(int jmltambah) {
 }
 
 void thunder_strike() {
-    damageDragon();
+    damageLord(1000);
     cout << "Damage Thunder Strike Lord : 1000\n";
 }
 
+void recall() {
+    attackRound = 0;
+    hp = 4500;
+    mp = 2500;
+    hpLord = 1000000;
+}
+
+// int randomgen(int max, int min) {
+//     int random = rand() % max + min;
+
+//     return random;
+// }
 int randomgen(int max, int min) {
     int random = min + (rand() % (max - min + 1));
 
@@ -69,75 +81,84 @@ bool digit_check(char key[]) {
 
 int main() {
     srand(time(NULL));
-    decoration();
-    cout << " -- 'Welcome to Dragon's Lair, Chief!' --\n";
-    cout << "  Slay the Giant Dragon to get the flag\n";
-    decoration();
+    hiasan1();
+    cout << "\t-- 'Welcome to Legenda Seluler' --\n";
+    cout << "\tKalahkan Lord untuk mendapatkan flag\n";
+    hiasan1();
+    cout << "\t   Note: Lord mengeluarkan skill\n";
+    cout << "\tThunder Strike setiap serangan ke-3\n";
     do {
         int cheat = randomgen(99999, 1000); 
-        decoration2();
+        hiasan2();
         cout << "\t  ===== Serangan Lord ke-" << attackRound << " =====\n";
-        decoration2();
-        cout << "=\tHero : Baby Dragon\t\n";
-        cout << "=\tHp   : " << hp << "/4500\t\n";
-        cout << "=\tMp   : " << mp << "/2500\t\n";
-        cout << "=\t     ------\t\t\n";
-        cout << "=\t     | VS |\t\t\n";
-        cout << "=\t     ------\t\t\n";
-        cout << "=\t* Giant Dragon *\t\n";
-        cout << "=\tHp   : " << hpDragon << "/32430\t\n";
-        decoration2();
-        cout << "Available options\n";
-        cout << "[1] Frezze Spell\n";
-        cout << "[2] Poison Spell\n";
-        cout << "[3] Lightning Spell\n";
-        cout << "[4] Healing Spell\n";
-        cout << "[0] End Battle\n";
-        cout << "Your choice [type numbers only]: ";
-        cin >> options;
-        decoration();
-        if (!digit_check(options)) {
+        hiasan2();
+        cout << "=\t\tHero : Eudora\t\t\t  =\n";
+        cout << "=\t\tHp   : " << hp << "/4500\t\t  =\n";
+        cout << "=\t\tMp   : " << mp << "/2500\t\t  =\n";
+        cout << "=\t\t   ------\t\t\t  =\n";
+        cout << "=\t\t   | VS |\t\t\t  =\n";
+        cout << "=\t\t   ------\t\t\t  =\n";
+        cout << "=\t\t=== Lord ===\t\t\t  =\n";
+        cout << "=\t\tHp   : " << hpLord << "/1000000\t\t  =\n";
+        hiasan2();
+        cout << "Pilihan yang tersedia\n";
+        cout << "[1] Ball Lightning\n";
+        cout << "[2] Forked Lightning\n";
+        cout << "[3] Thunder's Wrath\n";
+        cout << "[4] Regen\n";
+        cout << "[5] Revitalize\n";
+        cout << "[6] Recall\n";
+        cout << "[0] AFK\n";
+        cout << "Pilihan anda [ketik angka saja]: ";
+        cin >> pilihan;
+        hiasan1();
+        if (!digit_check(pilihan)) {
             attackRound = attackRound;
-            cout << "Hey Chief, type numbers only!\n";
+            cout << "Wahai anak senja, masukan angka saja\n";
         } else {
             if (hp <= 0) {
-                cout << "--------------------------------------------------------\n";
-                cout << "| Let's review our strategy for the next battle Chief! |\n";
-                cout << "--------------------------------------------------------\n";
-                sleep(3);
+                cout << "------------\n";
+                cout << "| {Defeat} |\n";
+                cout << "------------\n";
+                sleep(2);
+                for(int r = 30; r >= 0; r--) {
+                    system("clear");
+                    cout << "\n{Resurrecting in " << r << "s}\n";
+                    sleep(1);
+                }
+                recall();
                 system("clear");
-            } else if (hpDragon <= 0) {
-               ifstream myfile;
+            } else if (hpLord <= 0) {
+                ifstream myfile;
                 string flag;
-                cout << "------------------------------------------\n";
-                cout << "| Congratulations on your victory Chief! |\n";
-                cout << "------------------------------------------\n";
+                cout << "-------------\n";
+                cout << "| {Victory} |\n";
+                cout << "-------------\n";
                 myfile.open("flag.txt");
                 getline(myfile, flag);
-                cout << "This flag is for you: \n";
                 cout << flag << endl;
                 loop = false;
             } else {
-                if(stoi(options) == cheat) { 
+                if(stoi(pilihan) == cheat) { 
                     if (mp <= 0) {
                         attackRound -= 1;
                         cout << "'Mana' habis, silahkan recall dulu\n";
                     } else {
                         cout << "Anda telah menekan tombol 'Gather' rekan tim anda\nMiya dan Roger datang membantu\n";
-                        decoration();
+                        hiasan1();
                         cout << "Damage bersama : 50000\n"; 
                         skill(50000, 10); 
                         if(attackRound % 3 == 0) {
                             thunder_strike();
                         } else {
                             cout << "Damage Lord : 500\n";
-                            damageDragon();
+                            damageLord(500);
                         }
                     }
                 } else {
-                        switch (stoi(options)) {
+                        switch (stoi(pilihan)) {
                             case 0:
-                                cout << "The battle is over...\n";
+                                cout << "Anda meninggalkan permainan...\n";
                                 loop = false;
                                 break;
                             case 1:
@@ -150,7 +171,7 @@ int main() {
                                     if(attackRound % 3 == 0) {
                                         thunder_strike();
                                     } else {
-                                        damageDragon();
+                                        damageLord(500);
                                         cout << "Damage Lord : 500\n";
                                     }
                                 }
@@ -165,7 +186,7 @@ int main() {
                                     if(attackRound % 3 == 0) {
                                         thunder_strike();
                                     } else {
-                                        damageDragon();
+                                        damageLord(500);
                                         cout << "Damage Lord : 500\n";
                                     }
                                 }
@@ -180,12 +201,21 @@ int main() {
                                     if(attackRound % 3 == 0) {
                                         thunder_strike();
                                     } else {
-                                        damageDragon();
+                                        damageLord(500);
                                         cout << "Damage Lord : 500\n";
                                     }
                                 }
                                 break;
                             case 4:
+                                attackRound -= 1;
+                                if(hp == 4500) {
+                                    cout << "Hp sudah penuh\n";
+                                } else {
+                                    tambahHp(300);
+                                    cout << "Regen Hp : 300\n";
+                                }
+                                break;
+                            case 5:
                                 if(hp == 4500) {
                                     cout << "Hp sudah penuh\n";
                                 } else {
@@ -195,13 +225,17 @@ int main() {
                                 if(attackRound % 3 == 0) {
                                     thunder_strike();
                                 } else {
-                                    damageDragon();
+                                    damageLord(500);
                                     cout << "Damage Lord : 500\n";
                                 }
                                 break;
+                            case 6:
+                                cout << "Tasss...tasss...tasss...\n";
+                                recall();
+                                break;
                             default:
                                 attackRound -= 1;
-                                cout << "The option you chose isn't available\n";
+                                cout << "Pilihan tidak tersedia\n";
                         }
                 }
             }

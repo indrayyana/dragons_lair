@@ -1,7 +1,7 @@
 from pwn import *
 from ctypes import CDLL
 
-p = process('./chall')
+p = process('./lord')
 # r = remote("localhost", 2022)
 libc = CDLL("libc.so.6")
 libc.srand(libc.time(0))
