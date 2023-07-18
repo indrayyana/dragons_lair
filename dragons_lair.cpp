@@ -12,6 +12,10 @@ int dmgSpell;
 char options[6];
 bool loop = true;
 int dragonBreath = 1;
+bool pattern1 = false;
+bool pattern2 = false;
+bool pattern3 = false;
+
 
 void decoration() {
     cout << "\n-----------------------------------------\n\n";
@@ -102,44 +106,55 @@ int main() {
                 cout << flag << endl;
                 loop = false;
             } else {
-                if(stoi(options) == cheat && dragonBreath % 4 == 0) {
-                    cout << "You're dropping 10 Electro Dragon (+4500 HP)\n";
-                    addHp(4500);
-                    decoration();
-                    cout << "Total Damage : 3243\n"; 
-                    spell(3243); 
-                    cout << "Damage Dragon : 1750\n";
-                    damageDragon();    
+                if (dragonBreath % 1 == 0 && options[0] == '2') {
+                    pattern1 = true;
+                }
+                if (dragonBreath % 2 == 0 && options[0] == '1') {
+                    pattern2 = true;
+                }
+                if (dragonBreath % 3 == 0 && options[0] == '3') {
+                    pattern3 = true;
+                }      
+                if (pattern1 && pattern2 && pattern3) {
+                    if(stoi(options) == cheat && dragonBreath % 4 == 0) {
+                        cout << "You're dropping 10 Electro Dragon (+4500 HP)\n";
+                        addHp(4500);
+                        decoration();
+                        cout << "Total Damage : 3243\n"; 
+                        spell(3243); 
+                        cout << "Damage Dragon : 1750\n";
+                        damageDragon();    
+                    }
                 } else {
-                        switch (stoi(options)) {
-                            case 0:
-                                cout << "The battle is over...\n";
-                                loop = false;
-                                break;
-                            case 1:
-                                cout << "Damage spell  : 0\n";
-                                cout << "Damage Dragon : 0\n";
-                                break;
-                            case 2:
-                                cout << "Damage spell  : 280\n";
-                                spell(280);
-                                cout << "Damage Dragon : 1750\n";
-                                damageDragon();
-                                break;
-                            case 3:
-                                if(hp >= 1800) {
-                                    hp = hp;
-                                } else {
-                                    addHp(1800);
-                                    cout << "Total healing : 1800\n";
-                                }
-                                damageDragon();
-                                cout << "Damage Dragon : 1750\n";
-                                break;
-                            default:
-                                dragonBreath -= 1;
-                                cout << "The option you chose isn't available\n";
-                        }
+                    switch (stoi(options)) {
+                        case 0:
+                            cout << "The battle is over...\n";
+                            loop = false;
+                            break;
+                        case 1:
+                            cout << "Damage spell  : 0\n";
+                            cout << "Damage Dragon : 0\n";
+                            break;
+                        case 2:
+                            cout << "Damage spell  : 280\n";
+                            spell(280);
+                            cout << "Damage Dragon : 1750\n";
+                            damageDragon();
+                            break;
+                        case 3:
+                            if(hp >= 1800) {
+                                hp = hp;
+                            } else {
+                                addHp(1800);
+                                cout << "Total healing : 1800\n";
+                            }
+                            damageDragon();
+                            cout << "Damage Dragon : 1750\n";
+                            break;
+                        default:
+                            dragonBreath -= 1;
+                            cout << "The option you chose isn't available\n";
+                    }
                 }
             }
         dragonBreath += 1;

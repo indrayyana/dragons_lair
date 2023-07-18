@@ -22,10 +22,17 @@ def heal():
     acak = 1000 + (libc.rand() % (99999 - 1000 + 1))
     r.sendlineafter(b': ', b'3')
 
-for x in range(10):
-    frezze()
+for x in range(1):
     poison()
+    frezze()
     heal()
-    cheat()
+    # cheat()
+
+# testing
+# for x in range(5):
+#     frezze()
+#     poison()
+#     heal()
+#     cheat()
 
 r.interactive()
