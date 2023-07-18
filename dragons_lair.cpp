@@ -65,8 +65,6 @@ int main() {
     do {
         int cheat = randomgen(99999, 1000); 
         decoration2();
-        // cout << "\t  ===== Serangan Dragon ke-" << dragonBreath << " =====\n";
-        // decoration2();
         cout << "=\t   Troop : Baby Dragon\t\t=\n";
         cout << "=\t   HP    : " << hp << "/1800\t\t=\n";
         cout << "=\t         ------\t\t\t=\n";
@@ -78,8 +76,7 @@ int main() {
         cout << "Available options\n";
         cout << "[1] Frezze Spell\n";
         cout << "[2] Poison Spell\n";
-        cout << "[3] Lightning Spell\n";
-        cout << "[4] Healing Spell\n";
+        cout << "[3] Healing Spell\n";
         cout << "[0] End Battle\n";
         cout << "Your choice [type numbers only]: ";
         cin >> options;
@@ -105,17 +102,14 @@ int main() {
                 cout << flag << endl;
                 loop = false;
             } else {
-                // if((dragonBreath % 1 == 0 && stoi(options) == 1) && (dragonBreath % 2 == 0 && stoi(options) == 2) && (dragonBreath % 3 == 0 && stoi(options) == 3)) {
-                if(dragonBreath % 4 == 0) {
-                    if(stoi(options) == cheat) { 
-                        cout << "You're dropping 10 Electro Dragon (+4500 HP)\n";
-                        addHp(4500);
-                        decoration();
-                        cout << "Total Damage : 3243\n"; 
-                        spell(3243); 
-                        cout << "Damage Dragon : 1750\n";
-                        damageDragon();
-                    }
+                if(stoi(options) == cheat && dragonBreath % 4 == 0) {
+                    cout << "You're dropping 10 Electro Dragon (+4500 HP)\n";
+                    addHp(4500);
+                    decoration();
+                    cout << "Total Damage : 3243\n"; 
+                    spell(3243); 
+                    cout << "Damage Dragon : 1750\n";
+                    damageDragon();    
                 } else {
                         switch (stoi(options)) {
                             case 0:
@@ -133,12 +127,6 @@ int main() {
                                 damageDragon();
                                 break;
                             case 3:
-                                cout << "Damage spell  : 560\n";
-                                spell(560);
-                                cout << "Damage Dragon : 1750\n";
-                                damageDragon();
-                                break;
-                            case 4:
                                 if(hp >= 1800) {
                                     hp = hp;
                                 } else {

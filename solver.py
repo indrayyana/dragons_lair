@@ -14,17 +14,18 @@ def frezze():
     acak = 1000 + (libc.rand() % (99999 - 1000 + 1))
     r.sendlineafter(b': ', b'1')
 
-def lightning():
+def poison():
     acak = 1000 + (libc.rand() % (99999 - 1000 + 1))
-    r.sendlineafter(b': ', b'3')
+    r.sendlineafter(b': ', b'2')
 
 def heal():
     acak = 1000 + (libc.rand() % (99999 - 1000 + 1))
-    r.sendlineafter(b': ', b'4')
+    r.sendlineafter(b': ', b'3')
 
 for x in range(10):
-    for i in range(3):
-        frezze()
+    frezze()
+    poison()
+    heal()
     cheat()
 
 r.interactive()
