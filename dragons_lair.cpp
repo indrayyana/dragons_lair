@@ -7,18 +7,18 @@
 using namespace std;
 
 int hp = 1800;
-int hpDragon = 32430;
-int dmgHero, dmgLord;
+int dragonHp = 32430;
+int dmgSpell;
 char options[6];
 bool loop = true;
-int attackRound = 1;
+int dragonBreath = 1;
 
 void decoration() {
-    cout << "------------------------------------------\n";
+    cout << "\n-----------------------------------------\n\n";
 }
 
 void decoration2() {
-    cout << "==========================================\n";
+    cout << "=========================================\n";
 }
 
 void damageDragon() {
@@ -28,15 +28,15 @@ void damageDragon() {
     }
 }
 
-void skill(int dmgHero) {
-    hpDragon -= dmgHero;
-    if (hpDragon < 0) {
-      hpDragon = 0;
+void spell(int dmgSpell) {
+    dragonHp -= dmgSpell;
+    if (dragonHp < 0) {
+      dragonHp = 0;
     }
 }
 
-void addHp(int jmltambah) {
-    hp += jmltambah;
+void addHp(int totalAdd) {
+    hp += totalAdd;
     if (hp > 4500) {
         hp = 4500;
     }
@@ -44,13 +44,12 @@ void addHp(int jmltambah) {
 
 int randomgen(int max, int min) {
     int random = min + (rand() % (max - min + 1));
-
     return random;
 }
 
 bool digit_check(char key[]) {
     for(int i = 0; i < strlen(key); i++) {
-        if(isdigit(key[i])==0) {
+        if(isdigit(key[i]) == 0) {
             return false;
         }
     }
@@ -60,21 +59,21 @@ bool digit_check(char key[]) {
 int main() {
     srand(time(NULL));
     decoration();
-    cout << " -- 'Welcome to Dragon's Lair, Chief!' --\n";
-    cout << "  Slay the Giant Dragon to get the flag\n";
+    cout << "-- 'Welcome to Dragon's Lair, Chief!' --\n";
+    cout << " Slay the Giant Dragon to get the flag\n";
     decoration();
     do {
         int cheat = randomgen(99999, 1000); 
         decoration2();
-        cout << "\t  ===== Serangan Dragon ke-" << attackRound << " =====\n";
-        decoration2();
-        cout << "=\tHero : Baby Dragon\t\n";
-        cout << "=\tHp   : " << hp << "/1800\t\n";
-        cout << "=\t     ------\t\t\n";
-        cout << "=\t     | VS |\t\t\n";
-        cout << "=\t     ------\t\t\n";
-        cout << "=\t* Giant Dragon *\t\n";
-        cout << "=\tHp   : " << hpDragon << "/32430\t\n";
+        // cout << "\t  ===== Serangan Dragon ke-" << dragonBreath << " =====\n";
+        // decoration2();
+        cout << "=\t   Troop : Baby Dragon\t\t=\n";
+        cout << "=\t   HP    : " << hp << "/1800\t\t=\n";
+        cout << "=\t         ------\t\t\t=\n";
+        cout << "=\t         | VS |\t\t\t=\n";
+        cout << "=\t         ------\t\t\t=\n";
+        cout << "=\t   ** Giant Dragon **\t\t=\n";
+        cout << "=\t   HP    : " << dragonHp << "/32430\t\t=\n";
         decoration2();
         cout << "Available options\n";
         cout << "[1] Frezze Spell\n";
@@ -86,16 +85,15 @@ int main() {
         cin >> options;
         decoration();
         if (!digit_check(options)) {
-            attackRound = attackRound;
+            dragonBreath = dragonBreath;
             cout << "Hey Chief, type numbers only!\n";
         } else {
             if (hp <= 0) {
                 cout << "--------------------------------------------------------\n";
                 cout << "| Let's review our strategy for the next battle Chief! |\n";
                 cout << "--------------------------------------------------------\n";
-                sleep(3);
-                system("clear");
-            } else if (hpDragon <= 0) {
+                loop = false;
+            } else if (dragonHp <= 0) {
                ifstream myfile;
                 string flag;
                 cout << "------------------------------------------\n";
@@ -103,19 +101,21 @@ int main() {
                 cout << "------------------------------------------\n";
                 myfile.open("flag.txt");
                 getline(myfile, flag);
-                cout << "This flag is for you: \n";
+                cout << "This flag is for you : \n";
                 cout << flag << endl;
                 loop = false;
             } else {
-                if(stoi(options) == cheat) { 
-                    cout << "You dropping 10 Electro Dragon(+4500 Hp)\n";
-                    addHp(4500);
-                    decoration();
-                    cout << "Damage : 3243\n"; 
-                    skill(3243); 
-                    cout << "Damage Dragon : 1750\n";
-                    damageDragon();
-                
+                // if((dragonBreath % 1 == 0 && stoi(options) == 1) && (dragonBreath % 2 == 0 && stoi(options) == 2) && (dragonBreath % 3 == 0 && stoi(options) == 3)) {
+                if(dragonBreath % 4 == 0) {
+                    if(stoi(options) == cheat) { 
+                        cout << "You're dropping 10 Electro Dragon (+4500 HP)\n";
+                        addHp(4500);
+                        decoration();
+                        cout << "Total Damage : 3243\n"; 
+                        spell(3243); 
+                        cout << "Damage Dragon : 1750\n";
+                        damageDragon();
+                    }
                 } else {
                         switch (stoi(options)) {
                             case 0:
@@ -123,36 +123,38 @@ int main() {
                                 loop = false;
                                 break;
                             case 1:
-                                cout << "Damage skill : 450\n";
-                                skill(450);
-                                damageDragon();
-                                cout << "Damage Dragon : 1750\n";
+                                cout << "Damage spell  : 0\n";
+                                cout << "Damage Dragon : 0\n";
                                 break;
                             case 2:
-                                cout << "Damage skill : 650\n";
-                                skill(650);
-                                damageDragon();
+                                cout << "Damage spell  : 280\n";
+                                spell(280);
                                 cout << "Damage Dragon : 1750\n";
+                                damageDragon();
                                 break;
                             case 3:
-                                cout << "Damage spell : 560\n";
-                                skill(560);
-                                damageDragon();
+                                cout << "Damage spell  : 560\n";
+                                spell(560);
                                 cout << "Damage Dragon : 1750\n";
+                                damageDragon();
                                 break;
                             case 4:
-                                addHp(1800);
-                                cout << "Total troop heal : 1800\n";
+                                if(hp >= 1800) {
+                                    hp = hp;
+                                } else {
+                                    addHp(1800);
+                                    cout << "Total healing : 1800\n";
+                                }
                                 damageDragon();
                                 cout << "Damage Dragon : 1750\n";
                                 break;
                             default:
-                                attackRound -= 1;
+                                dragonBreath -= 1;
                                 cout << "The option you chose isn't available\n";
                         }
                 }
             }
-        attackRound += 1;
+        dragonBreath += 1;
         }
         cout << endl;
     } while (loop);
