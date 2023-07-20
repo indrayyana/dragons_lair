@@ -1,8 +1,8 @@
 from pwn import *
 from ctypes import CDLL
 
-r = process('./chall')
-# r = remote("localhost", 2022)
+# r = process('./chall')
+r = remote("localhost", 2022)
 libc = CDLL("libc.so.6")
 libc.srand(libc.time(0))
 
@@ -77,12 +77,5 @@ poison() #122
 frezze() #123
 cheat() #124
 frezze() #125
- 
-# testing
-# for x in range(5):
-#     frezze()
-#     poison()
-#     heal()
-#     cheat()
 
 r.interactive()

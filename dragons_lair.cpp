@@ -78,7 +78,7 @@ int main() {
         cout << "=\t   HP    : " << dragonHp << "/32430\t\t=\n";
         decoration2();
         cout << "Available options\n";
-        cout << "[1] Frezze Spell\n";
+        cout << "[1] Freeze Spell\n";
         cout << "[2] Poison Spell\n";
         cout << "[3] Healing Spell\n";
         cout << "[0] End Battle\n";
@@ -138,11 +138,11 @@ int main() {
                             loop = false;
                             break;
                         case 1:
-                            cout << "Damage spell  : 0\n";
+                            cout << "Damage Spell  : 0\n";
                             cout << "Damage Dragon : 0\n";
                             break;
                         case 2:
-                            cout << "Damage spell  : 280\n";
+                            cout << "Damage Spell  : 280\n";
                             spell(280);
                             cout << "Damage Dragon : 1750\n";
                             damageDragon();
@@ -152,7 +152,7 @@ int main() {
                                 hp = hp;
                             } else {
                                 addHp(1800);
-                                cout << "Total healing : 1800\n";
+                                cout << "Total Healing : 1800\n";
                             }
                             cout << "Damage Dragon : 1750\n";
                             damageDragon();
