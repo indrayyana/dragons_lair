@@ -95,7 +95,7 @@ int main() {
                 cout << "--------------------------------------------------------\n";
                 loop = false;
             } else if (dragonHp <= 0) {
-               ifstream myfile;
+                ifstream myfile;
                 string flag;
                 cout << "------------------------------------------\n";
                 cout << "| Congratulations on your victory Chief! |\n";
@@ -106,17 +106,17 @@ int main() {
                 cout << flag << endl;
                 loop = false;
             } else {
-                if (dragonBreath % 1 == 0 && options[0] == '2') {
+                if (dragonBreath % 1 == 0 && options[0]-'0' == 1) {
                     pattern1 = true;
                 }
-                if (dragonBreath % 2 == 0 && options[0] == '1') {
+                if (dragonBreath % 2 == 0 && options[0]-'0' == 2) {
                     pattern2 = true;
                 }
-                if (dragonBreath % 3 == 0 && options[0] == '3') {
+                if (dragonBreath % 3 == 0 && options[0]-'0' == 3) {
                     pattern3 = true;
-                }      
-                if (pattern1 && pattern2 && pattern3) {
-                    if(stoi(options) == cheat && dragonBreath % 4 == 0) {
+                } 
+                if(stoi(options) == cheat) {
+                    if (pattern1 && pattern2 && pattern3) {
                         cout << "You're dropping 10 Electro Dragon (+4500 HP)\n";
                         addHp(4500);
                         decoration();
@@ -124,6 +124,12 @@ int main() {
                         spell(3243); 
                         cout << "Damage Dragon : 1750\n";
                         damageDragon();    
+
+                        pattern1 = false;
+                        pattern2 = false;
+                        pattern3 = false;
+                    } else {
+                        cout << "The option you chose isn't available\n";
                     }
                 } else {
                     switch (stoi(options)) {
@@ -148,8 +154,8 @@ int main() {
                                 addHp(1800);
                                 cout << "Total healing : 1800\n";
                             }
-                            damageDragon();
                             cout << "Damage Dragon : 1750\n";
+                            damageDragon();
                             break;
                         default:
                             dragonBreath -= 1;
