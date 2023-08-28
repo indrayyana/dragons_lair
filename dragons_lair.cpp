@@ -102,8 +102,12 @@ int main() {
                 cout << "------------------------------------------\n";
                 myfile.open("flag.txt");
                 getline(myfile, flag);
-                cout << "This flag is for you : \n";
-                cout << flag << endl;
+                
+                int key = randomgen(90, 9);
+                for (int i = 0; (i < flag.length() && flag[i] != '\0'); i++) {
+                    flag[i] = flag[i] ^ key;
+                }
+                cout << "flag: " << flag << endl;
                 loop = false;
             } else {
                 if (dragonBreath % 1 == 0 && options[0]-'0' == 1) {
