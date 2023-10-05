@@ -22,61 +22,18 @@ def heal():
     acak = 1000 + (libc.rand() % (99999 - 1000 + 1))
     r.sendlineafter(b': ', b'3')
 
-frezze()
+for i in range(17):
+    frezze()
+    poison()
+    heal()
+    cheat()   
+    
+    if (i != 16): 
+        frezze()
+        frezze()
+
 poison()
-heal()
-cheat()
 frezze()
-poison()
-frezze() #7
-frezze() #8
-heal() #9
-cheat() #10
-frezze() #11
-poison() #12
-frezze() #13
-frezze() #14
-heal() #15
-cheat() #16
-frezze() #17
-heal() #18
-frezze() #19
-for i in range(16):
-    heal()
-poison() #36
-cheat() #37
-poison() #38
-heal() #39
-frezze() #40
-cheat() #41
-heal() #42
-frezze() #43
-for i in range(16):
-    heal()
-poison() #60
-cheat() #61
-poison() #62
-heal() #63
-frezze() #64
-cheat() #65
-heal() #66
-frezze() #67
-for i in range(16):
-    heal()
-poison() #84
-cheat() #85
-poison() #86
-for i in range(16):
-    heal()
-frezze() #103
-cheat() #104
-heal() #105
-for i in range(16):
-    heal()
-poison() #122
-frezze() #123
-cheat() #124
-frezze() #125
 
 r.recvuntil(b"flag: ")
 
@@ -89,4 +46,4 @@ for i in range(len(flag)):
 
 r.interactive()
 
-print(f"slashroot7{{{result}}}")
+print(result)
