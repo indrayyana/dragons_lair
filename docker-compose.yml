@@ -1,0 +1,12 @@
+version: "3"
+services:
+  binary1:
+    build:
+      context: .
+    image: reverse
+    container_name: slashroot7-dragons_lair
+    entrypoint: socat tcp-listen:8000,reuseaddr,fork exec:/home/app/chall
+    volumes:
+      - ".:/home/app"
+    ports:
+      - "2024:8000"
