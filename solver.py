@@ -1,7 +1,8 @@
-from pwn import *
+import pwn
+import re
 from ctypes import CDLL
 
-r = process('./chall')
+r = pwn.process('./chall')
 # r = remote("localhost", 2022)
 libc = CDLL("libc.so.6")
 libc.srand(libc.time(0))
@@ -37,13 +38,25 @@ frezze()
 
 r.recvuntil(b"flag: ")
 
-flag = r.recvline().strip() # Mengambil output flag
-result = ""
+enc_flag = r.recvline().strip() # Mengambil output flag
+dec_flag = ""
 key = 9 + (libc.rand() % (90 - 9 + 1))
-for i in range(len(flag)): 
-    tmp = flag[i] ^ key
-    result += chr(tmp)
+
+for c in enc_flag: 
+    dec_flag += chr(c ^ key)
+
+
+arr_num = re.findall(r'\d{3}', dec_flag)
+shifted_results = []
+
+for num in arr_num:
+    right_shift = int(num) >> 7
+    shifted_results.append(right_shift)
+
+flag = dec_flag
+for num, result in zip(arr_num, shifted_results):
+    flag = flag.replace(num, str(result))
 
 r.interactive()
 
-print(result)
+print(flag)

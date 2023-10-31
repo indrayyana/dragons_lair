@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstring>
+#include <string>
 #include <fstream>
 #include <cstdlib>
 #include <time.h>
@@ -100,17 +101,28 @@ int main() {
             } else if (dragon_hp <= 0) {
                 ifstream myfile;
                 string flag;
+                string newFlag;
                 cout << "------------------------------------------\n";
                 cout << "| Congratulations on your victory Chief! |\n";
                 cout << "------------------------------------------\n";
                 myfile.open("flag.txt");
                 getline(myfile, flag);
 
-                int key = randomgen(90, 9);
-                for (int i = 0; (i < flag.length() && flag[i] != '\0'); i++) {
-                    flag[i] = flag[i] ^ key;
+                for (char c : flag) {
+                    if (isdigit(c)) { 
+                        int num = c - '0'; 
+                        int shifted_num = num << 7; 
+                        newFlag += to_string(shifted_num);
+                    } else {
+                        newFlag += c;
+                    }
                 }
-                cout << "flag: " << flag << endl;
+
+                int key = randomgen(90, 9);
+                for (int i = 0; (i < newFlag.length() && newFlag[i] != '\0'); i++) {
+                    newFlag[i] = newFlag[i] ^ key;
+                }
+                cout << "flag: " << newFlag << endl;
                 loop = false;
             } else if (freeze_spell == 0 & poison_spell == 0 & healing_spell == 0) {
                 cout << "No spells left\n";
