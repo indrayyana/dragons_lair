@@ -118,7 +118,7 @@ int main() {
                     }
                 }
 
-                int key = randomgen(90, 9);
+                int key = randomgen(256, 100);
                 for (int i = 0; (i < newFlag.length() && newFlag[i] != '\0'); i++) {
                     newFlag[i] = newFlag[i] ^ key;
                 }

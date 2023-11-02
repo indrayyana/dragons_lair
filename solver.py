@@ -1,8 +1,8 @@
-import pwn
+from pwn import *
 import re
 from ctypes import CDLL
 
-r = pwn.process('./chall')
+r = process('./chall')
 # r = remote("localhost", 2022)
 libc = CDLL("libc.so.6")
 libc.srand(libc.time(0))
@@ -40,7 +40,7 @@ r.recvuntil(b"flag: ")
 
 enc_flag = r.recvline().strip() # Mengambil output flag
 dec_flag = ""
-key = 9 + (libc.rand() % (90 - 9 + 1))
+key = 100 + (libc.rand() % (256 - 100 + 1))
 
 for c in enc_flag: 
     dec_flag += chr(c ^ key)
